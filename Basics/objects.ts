@@ -16,6 +16,23 @@ const randomCoordinate = (): { x: number; y: number } => {
 
 //
 
+// Excess Property Checks
 // greet({first: 'Mick', last: 'Jagger', age: 50})
 const singer = { first: "Mick", last: "Jagger", age: 50 };
 greet(singer);
+// Kl mau bs di greet(), first last hrs ada.
+
+//
+
+// Type Alias
+
+type Person = {
+  name: string;
+  age: number;
+};
+
+const sayHbd = (person: Person) => {
+  console.log(
+    `Happy birthday, ${person.name}! Congrats on turning ${person.age}`
+  );
+};
