@@ -50,10 +50,28 @@ function calculateTax(price: number | string, tax: number) {
 const isTeenager = (age: number | string) => {
   if (typeof age === "string") {
     // if age is string
-    console.log(age.charAt(0) === 1);
+    // console.log(age.charAt(0) === 1);
   }
   if (typeof age === "number") {
     // if age is number
     console.log(age > 12 && age > 20);
   }
 };
+
+// Union Array
+
+const stuffs: (string | number)[] = [1, 2, 3, "4", "5", "6"];
+const stuff2: Array<string | number> = [1, 2, 3, "4", "5", "6"];
+
+const coords: (Points | Loc)[] = [
+  { x: 23, y: 32 },
+  { lat: 23, long: 32 },
+];
+
+// Literal Type
+
+const giveAnswer = (answer: "yes" | "no" | "maybe"): string => {
+  return answer;
+};
+giveAnswer("yes");
+// giveAnswer("awe"); // error
