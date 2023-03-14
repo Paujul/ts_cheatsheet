@@ -3,22 +3,44 @@ const btn = document.getElementById("btn");
 const input = document.getElementById("todoinput");
 const form = document.getElementById("todoform");
 const list = document.getElementById("todolist");
-// form.addEventListener("submit", function (e) {
-//   e.preventDefault();
-//   // console.log(input.value);
-//   console.log("SUBMITTED!");
-// });
+const todos = readTodos();
+todos.forEach(createTodo);
+const todosJSON = localStorage.getItem("todos");
+JSON.parse(todosJSON);
+localStorage.getItem("todos") && console.log(JSON.parse(todosJSON));
+console.log(todosJSON);
+//
+function readTodos() {
+    const todosJSON = localStorage.getItem("todos");
+    if (todosJSON === null)
+        return [];
+    return JSON.parse(todosJSON);
+    // return todosJSON ? JSON.parse(todosJSON) : [];
+}
+function saveTodos() {
+    localStorage.setItem("todos", JSON.stringify(todos));
+}
 function handleSubmit(e) {
     e.preventDefault();
-    const newTodo = input.value;
+    const newTodo = {
+        text: input.value,
+        completed: false,
+    };
+    createTodo(newTodo);
+    todos.push(newTodo);
+    saveTodos();
+    console.log("Submitted");
+}
+function createTodo(todo) {
     const newLi = document.createElement("li");
-    newLi.append(newTodo);
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = todo.completed;
+    checkbox.addEventListener("change", function () {
+        todo.completed = !todo.completed;
+        saveTodos();
+    });
+    newLi.append(checkbox, todo.text);
     list.append(newLi);
-    console.log("SUBMITTED!");
 }
 form.addEventListener("submit", handleSubmit);
-// btn.addEventListener("click", () => {
-//   console.log(input.value);
-// });
-//  const mystery: unknown = "Hello World"
-//  const numChars = (mystery as string).length
